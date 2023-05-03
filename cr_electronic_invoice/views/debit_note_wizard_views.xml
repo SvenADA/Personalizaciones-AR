@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_debit_note_wizard" model="ir.ui.view">
+            <field name="name">Wizard para crear la nota de debito</field>
+            <field name="model">debit.note.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="invoice_id" readonly="1"/>
+                                <field name="reference_code_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="reference_reason" required="1"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button string="Crear" name="create_debit_note" type="object" class="oe_highlight"/>
+                            <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_debit_note_wizard" model="ir.actions.act_window">
+            <field name="name">Nota de Débito</field>
+            <field name="res_model">debit.note.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

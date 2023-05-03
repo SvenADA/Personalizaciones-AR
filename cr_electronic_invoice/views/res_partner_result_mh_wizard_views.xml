@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_res_partner_result_mh_wizard" model="ir.ui.view">
+            <field name="name">Wizard para cargar los resultados de consulta del cliente en MH</field>
+            <field name="model">res.partner.result.mh.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Datos generales">
+                                <field name="name" nolabel="1" force_save="1" required="1" colspan="2"/>
+                                <field name="name_lowercase" widget="boolean_toggle"/>
+                                <field name="identification_id" readonly="1" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}"/>
+                                <field name="ref" readonly="1"/>
+                                <field name="email" readonly="1"/>
+                                <field name="is_additional_mail" widget="boolean_toggle" attrs="{'invisible': [('email', '=', False)]}"/>
+                                <field name="regime" readonly="1"/>
+                            </group>
+
+                            <group string="Situación">
+                                <field name="defaulter" readonly="1"/>
+                                <field name="omitted" readonly="1"/>
+                                <field name="state" readonly="1"/>
+                                <field name="tax_administration" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Actividades Económicas">
+                            <field name="activity_lines" nolabel="1" widget="one2many_list" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Registro MAG, INCOPESCA, Acuicultores">
+                            <field name="mag_lines" nolabel="1" widget="one2many_list" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="type"/>
+                                    <field name="due_date"/>
+                                    <field name="validity"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <footer>
+                            <button string="Guardar" name="save_all" type="object" class="oe_highlight"/>
+                            <button string="Guardar nombre" name="save_name" type="object" class="oe_highlight"/>
+                            <button string="Guardar email" name="save_email" type="object" class="oe_highlight"/>
+                            <button string="Guardar Actividades Económicas" name="save_activities" type="object" class="oe_highlight"/>
+                            <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_res_partner_result_mh_wizard" model="ir.actions.act_window">
+            <field name="name">Resultado de consulta de cliente en MH</field>
+            <field name="res_model">res.partner.result.mh.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

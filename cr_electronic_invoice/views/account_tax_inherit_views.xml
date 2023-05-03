@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="view_tax_form_inherit" model="ir.ui.view">
+			<field name="name">account.tax.form.inherit</field>
+			<field name="model">account.tax</field>
+			<field name="inherit_id" ref="account.view_tax_form"/>
+			<field name="arch" type="xml">
+
+				<xpath expr="//group//group[last()]" position="after">
+					<group string="Facturación Electrónica" >
+						<field name="tax_type" required="1" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+						<field name="tax_rate" required="0" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+						<field name="other_charge" required="0" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+					</group>
+				</xpath>
+
+			</field>
+		</record>
+
+	</data>
+</odoo>

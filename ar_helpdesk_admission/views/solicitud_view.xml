@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- Acción para ir a Solicitud de Admisión -->
+
+    <record id="solicitudadmision_action" model="ir.actions.act_window">
+        <field name="name">Solicitudes de Admisión</field>
+        <field name="res_model">solicitud_admision</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    
+    <menuitem id="helpdesk_admision_menu_main" name="Admisión" sequence="10" parent="helpdesk.menu_helpdesk_root"/>
+    <menuitem id="helpdesk_admision_forms" name="Formularios" action="solicitudadmision_action" sequence="10" parent="helpdesk_admision_menu_main"/>
+
+</odoo>

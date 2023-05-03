@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+<!--        <template id="website_product_multi_uom.assets_frontend" inherit_id="website.assets_frontend" name="UOM JS">-->
+<!--            <xpath expr="." position="inside">-->
+<!--                <script type="text/javascript" src="/website_product_multi_uom/static/src/js/uom.js"/>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+        <template id="uom_product_specific" inherit_id="website_sale.product_quantity" name="Product UOM">
+            <xpath expr="//div[hasclass('css_quantity')]" position="inside">
+                <input type="hidden" name="test" value="10"/>
+                <t t-set="uom" t-value="product.get_uom()"/>
+                <t t-if="uom">
+                    <select id="uom_selector" name="uom_selector" class="btn ml-2">
+                        <t t-foreach="uom['uom_dict']" t-as="um">
+                            <t t-if="um['uom_id'] ==  uom['default']">
+                                <option t-att-value="um['uom_id']" selected="1">
+                                    <t t-esc="um['uom_name']"/>
+                                </option>
+                            </t>
+                            <t t-else="">
+                                <option t-att-value="um['uom_id']">
+                                    <t t-esc="um['uom_name']"/>
+                                </option>
+                            </t>
+                        </t>
+                    </select>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="uom_cart_lines" inherit_id="website_sale.cart_lines" name="Cart Product UOM">
+            <xpath expr="//div[hasclass('css_quantity')]/t/t" position="inside">
+                <span class="line_uom" style="margin-top: 13px;margin-left: 5px;" t-att-data-line-uom-id="line.product_uom.id">
+                    <t t-esc="line.product_uom.name"/>
+                </span>
+            </xpath>
+
+            <xpath expr="//div[hasclass('css_quantity')]/t/t/input" position="attributes">
+                <attribute name="t-att-data-line-uom-id">line.product_uom.id</attribute>
+            </xpath>
+        </template>
+    </data>
+</odoo>

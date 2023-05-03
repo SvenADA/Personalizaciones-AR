@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="product_uom_square_meter" model="uom.uom">
+            <field name="code">m²</field>
+            <field name="name">Metro Cuadrado</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.uom_categ_length"/>
+        </record>
+        <record id="product_uom_cubic_meter" model="uom.uom">
+            <field name="code">m³</field>
+            <field name="name">Metro Cúbico</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.uom_categ_length"/>
+        </record>
+        <record id="product_uom_sp" model="uom.uom">
+            <field name="code">Sp</field>
+            <field name="name">Servicios Profesionales</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        <record id="ei_product_uom_Al" model="uom.uom">
+            <field name="code">Al</field>
+            <field name="name">Alquiler de uso habitacional</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        <record id="ei_product_uom_Alc" model="uom.uom">
+            <field name="code">Alc</field>
+            <field name="name">Alquiler de uso comercial</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        <record id="ei_product_uom_Cm" model="uom.uom">
+            <field name="code">Cm</field>
+            <field name="name">Comisiones</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        <record id="ei_product_uom_Os" model="uom.uom">
+            <field name="code">Os</field>
+            <field name="name">Otro tipo de servicios</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        <record id="ei_product_uom_Spe" model="uom.uom">
+            <field name="code">Spe</field>
+            <field name="name">Servicios Personales</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        <record id="ei_product_uom_St" model="uom.uom">
+            <field name="code">St</field>
+            <field name="name">Servicios Técnicos</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        <record id="ei_product_uom_Otros" model="uom.uom">
+            <field name="code">Otros</field>
+            <field name="name">Otros</field>
+            <field name="active" eval="True"/>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.01"/>
+            <field name="uom_type">smaller</field>
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+        </record>
+        
+    </data>
+</odoo>

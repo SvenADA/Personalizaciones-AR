@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="web.external_layout_bold">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div class="o_clean_header">
+                    <div class="row">
+                        <div class="col-6">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                        </div>
+                        <div class="col-5 offset-1" name="company_address">
+                            <div t-if="company.name">
+                                <strong t-field="company.name"/>
+                            </div>
+                            <div t-if="company.vat">
+                                <i class="fa fa-id-card fa-1x"> <span t-field="company.vat"/></i>
+                            </div>
+                            <div t-if="company.email">
+                                <i class="fa fa-envelope-o fa-1x"> <span t-field="company.email"/></i>
+                            </div>
+                            <div t-if="company.website">
+                                <i class="fa fa-globe fa-1x"> <span t-field="company.website"/></i>
+                            </div>
+                            <div t-if="company.phone">
+                                <i class="fa fa-phone fa-1x"> <span t-field="company.phone"/></i>
+                            </div>
+                            <i class="fa fa-map-marker fa-1x"> </i>
+                            <span t-if="company.country_id" t-field="company.country_id"/>
+                            <!-- Se evita error en la opcion de 'Configurar el diseño de tu documento'-->
+                            <t t-if="company._name != 'base.document.layout'" >
+                                <span t-if="company.state_id">, </span>
+                                <span t-if="company.state_id" t-field="company.state_id"/>
+                                <span t-if="company.county_id">, </span>
+                                <span t-if="company.county_id" t-field="company.county_id"/>
+                                <span t-if="company.district_id">, </span>
+                                <span t-if="company.district_id" t-field="company.district_id"/>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div t-attf-class="article o_report_layout_bold o_company_#{company.id}_layout {{  'o_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' }});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-out="0"/>
+            </div>
+
+            <div t-attf-class="footer o_clean_footer o_company_#{company.id}_layout">
+                <t t-if="doc_model=='account.move'" >
+                    <div class="text-center" style="font-size:11px;" t-if="o.type_document in ('01', '02', '03', '04', '08', '09')">
+                        <p>Autorizada mediante resolución No. DGT-R-033-2019 del 20/06/2019, versión del documento 4.3</p>
+                    </div>
+                </t>
+                <div class="row">
+                    <div class="col-4">
+                        <span t-field="company.report_footer"/>
+                    </div>
+                    <div class="col-4">
+                        <span t-if="company.company_details" t-field="company.company_details"/>
+                    </div>
+                    <div class="col-3">
+                        <h5 class="mt0 mb0" t-field="company.report_header"/>
+                    </div>
+                    <div class="col-1">
+                        <ul t-if="report_type == 'pdf'" class="list-inline pagenumber float-right text-center">
+                            <li class="list-inline-item"><strong><span class="page"/></strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+    </data>
+</odoo>

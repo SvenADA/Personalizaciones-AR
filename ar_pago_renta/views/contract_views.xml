@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<odoo>
+    <data noupdate="0">
+        <record id="inherited_hr_contract_view_form" model="ir.ui.view">
+            <field name="name">hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='salary_and_advantages']" position="inside">
+                    <label for="first_wage"/>
+                    <div class="o_row" name="first_wage_container">
+                        <field name="first_wage" nolabel="1"/>
+                    </div>
+                    <label for="second_wage"/>
+                    <div class="o_row" name="second_wage_container">
+                        <field name="second_wage" nolabel="1"/>
+                    </div>
+                    <label for="commission"/>
+                    <div class="o_row" name="commission_container">
+                        <field name="commission" nolabel="1"/>
+                    </div>
+                    <label for="xmas_bonus"/>
+                    <div class="o_row" name="xmas_bonus_container">
+                        <field name="xmas_bonus" nolabel="1"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//group[@name='salary_and_advantages']" position="after">
+                    <group name="inabilty_group" string="Incapacidades">
+                        <label for="inabilty_days"/>
+                        <div class="o_row" name="inabilty_days_container">
+                            <field name="inabilty_days" nolabel="1"/>
+                        </div>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='structure_type_id']" position="before">
+                    <label for="bank_account"/>
+                    <div class="o_row" name="bank_account">
+                        <field name="bank_account" nolabel="1"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//group[@name='yearly_advantages']" position="attributes">
+                    <attribute name="string">Beneficios</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

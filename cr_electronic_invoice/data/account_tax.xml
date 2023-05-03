@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- No se actulizan por problemas con la compannia-->
+    <data noupdate="1">
+
+        <!-- Ventas-->
+        <record id="AccountTax_0" model="account.tax">
+            <field name="name">Tarifa 0%</field>
+            <field name="amount">0</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_1"/>
+            <field name="description">0%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_2" model="account.tax">
+            <field name="name">Tarifa Reducida 1%</field>
+            <field name="amount">1</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_2"/>
+            <field name="description">1%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_3" model="account.tax">
+            <field name="name">Tarifa Reducida 2%</field>
+            <field name="amount">2</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_3"/>
+            <field name="description">2%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_4" model="account.tax">
+            <field name="name">Tarifa Reducida 4%</field>
+            <field name="amount">4</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_4"/>
+            <field name="description">4%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_5" model="account.tax">
+            <field name="name">Transitorio 0%</field>
+            <field name="amount">0</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_5"/>
+            <field name="description">0%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_6" model="account.tax">
+            <field name="name">Transitorio 4%</field>
+            <field name="amount">4</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_6"/>
+            <field name="description">4%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_7" model="account.tax">
+            <field name="name">Transitorio 8%</field>
+            <field name="amount">8</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_7"/>
+            <field name="description">8%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_8" model="account.tax">
+            <field name="name">Tarifa General 13%</field>
+            <field name="amount">13</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_8"/>
+            <field name="description">13%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+                
+        <!--Compras-->
+        <record id="AccountTax_9" model="account.tax">
+            <field name="name">Tarifa 0%</field>
+            <field name="amount">0</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_1"/>
+            <field name="description">0%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+        
+        <record id="AccountTax_10" model="account.tax">
+            <field name="name">Tarifa Reducida 1%</field>
+            <field name="amount">1</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_2"/>
+            <field name="description">1%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+        
+        <record id="AccountTax_11" model="account.tax">
+            <field name="name">Tarifa Reducida 2%</field>
+            <field name="amount">2</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_3"/>
+            <field name="description">2%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+        
+        <record id="AccountTax_12" model="account.tax">
+            <field name="name">Tarifa Reducida 4%</field>
+            <field name="amount">4</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_4"/>
+            <field name="description">4%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+        
+        <record id="AccountTax_13" model="account.tax">
+            <field name="name">Transitorio 0%</field>
+            <field name="amount">0</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_5"/>
+            <field name="description">0%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+        
+        <record id="AccountTax_14" model="account.tax">
+            <field name="name">Transitorio 4%</field>
+            <field name="amount">4</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_6"/>
+            <field name="description">4%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+        
+        <record id="AccountTax_15" model="account.tax">
+            <field name="name">Transitorio 8%</field>
+            <field name="amount">8</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_7"/>
+            <field name="description">8%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+        
+        <record id="AccountTax_16" model="account.tax">
+            <field name="name">Tarifa General 13%</field>
+            <field name="amount">13</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_8"/>
+            <field name="description">13%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+                
+        <record id="AccountTax_17" model="account.tax">
+            <field name="name">Sin Impuesto del IVA (Exento)</field>
+            <field name="amount">0</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_10"/>
+            <field name="description">0%</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+        
+        <record id="AccountTax_18" model="account.tax">
+            <field name="name">Sin Impuesto del IVA (Exento)</field>
+            <field name="amount">0</field>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_10"/>
+            <field name="description">0%</field>
+            <field name="type_tax_use">purchase</field>
+        </record>
+
+        <!-- Se utiliza para logica del iva delvuelto, no se utiliza en facturas-->
+        <record id="account_tax_return_iva" model="account.tax">
+            <field name="name">Devolución del IVA 4%</field>
+            <field name="amount">4</field>
+            <field name="active" eval="False"/>
+            <field name="tax_type" ref="cr_electronic_invoice.invoice_tax_type_1"/>
+            <field name="tax_rate" ref="cr_electronic_invoice.invoice_tax_code_rate_4"/>
+            <field name="type_tax_use">sale</field>
+        </record>
+               
+    </data>
+</odoo>

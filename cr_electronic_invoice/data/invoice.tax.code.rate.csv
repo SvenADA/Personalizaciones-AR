@@ -1,0 +1,10 @@
+id,name,code,active,rate
+invoice_tax_code_rate_1,Tarifa 0% (Exento),01,True,0
+invoice_tax_code_rate_2,Tarifa Reducida 1%,02,True,1
+invoice_tax_code_rate_3,Tarifa reducida 2%,03,True,2
+invoice_tax_code_rate_4,Tarifa reducida 4%,04,True,4
+invoice_tax_code_rate_5,Transitorio 0%,05,True,0
+invoice_tax_code_rate_6,Transitorio 4%,06,True,4
+invoice_tax_code_rate_7,Transitorio 8%,07,True,8
+invoice_tax_code_rate_8,Tarifa General 13%,08,True,13
+

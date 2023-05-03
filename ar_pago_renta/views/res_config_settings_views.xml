@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_l10n_cr_edi_payslip" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.l10n.cr.edi.payslip</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_payroll.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='hr_payroll_accountant']" position="after">
+                <h2 attrs="{'invisible': [('country_code', '!=', 'CR')]}">Configuración de nómina Costa Rica</h2>
+                <div
+                    class="row mt16 o_settings_container"
+                    name="rent_limits_setting_container"
+                    attrs="{'invisible': [('country_code', '!=', 'CR')]}"
+                >
+                    <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="rent_limits_configuration"
+                        title="The parameters to configure the limits for Rents."
+                    >
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Configuraciòn limites de renta</span>
+                            <div class="text-muted">
+                                Configura los limites de renta.
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="l10n_cr_primer_limite" class="col-lg-3" />
+                                    <field name="l10n_cr_primer_limite" />
+                                    <label for="l10n_cr_segundo_limite" class="col-lg-3" />
+                                    <field name="l10n_cr_segundo_limite" />
+                                </div>
+                                <div class="row">
+                                    <label for="l10n_cr_tercer_limite" class="col-lg-3" />
+                                    <field name="l10n_cr_tercer_limite" />
+                                    <label for="l10n_cr_cuarto_limite" class="col-lg-3" />
+                                    <field name="l10n_cr_cuarto_limite" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="col-lg-6 o_setting_box"
+                        id="rent_configuration"
+                        title="The parameters to configure the Rents."
+                    >
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Rent Configuration</span>
+                            <div class="text-muted">
+                                Configure data to rents.
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="l10n_cr_monto_por_hijo" class="col-lg-3" />
+                                    <field name="l10n_cr_monto_por_hijo" />
+                                    <label for="l10n_cr_monto_por_conyuge" class="col-lg-3" />
+                                    <field name="l10n_cr_monto_por_conyuge" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="row mt16 o_settings_container"
+                    name="hr_payslip_setting_container"
+                    attrs="{'invisible': [('country_code', '!=', 'CR')]}"
+                >
+                    <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="hr_payslip_configuration"
+                        title="The parameters to configure the Payslip."
+                    >
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Costa Rica</span>
+                            <div class="text-muted">
+                                Configure data to payroll rules.
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label
+                                        for="l10n_cr_edi_days_daily_wage"
+                                        string="Days for Daily Wage"
+                                        class="col-lg-6 o_light_label"
+                                    />
+                                    <field name="l10n_cr_edi_days_daily_wage" class="text-left oe_inline" />
+                                </div>
+                                <div class="row mt16">
+                                    <label for="l10n_cr_ccss" class="col-lg-6 o_light_label" />
+                                    <field name="l10n_cr_ccss" class="text-left oe_inline" />
+                                    <label for="l10n_cr_ccss_patrono" class="col-lg-6 o_light_label" />
+                                    <field name="l10n_cr_ccss_patrono" class="text-left oe_inline" />
+                                </div>
+                                <div class="row">
+                                    <label for="l10n_cr_bpdc" class="col-lg-6 o_light_label" />
+                                    <field name="l10n_cr_bpdc" class="text-left oe_inline" />
+                                    <label for="l10n_cr_bpdc_patrono" class="col-lg-6 o_light_label" />
+                                    <field name="l10n_cr_bpdc_patrono" class="text-left oe_inline" />
+                                </div>
+                                <div class="row">
+                                    <label
+                                        for="l10n_cr_asociacion_solidarista"
+                                        class="col-lg-6 o_light_label"
+                                    />
+                                    <field name="l10n_cr_asociacion_solidarista" class="text-left oe_inline" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="col-lg-6 o_setting_box"
+                        id="ins_configuration"
+                        title="The parameters to configure the INS."
+                    >
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">INS</span>
+                            <div class="text-muted">
+                                Configure data to INS report.
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="l10n_cr_ins_number" class="col-lg-3" />
+                                    <field name="l10n_cr_ins_number" />
+                                    <label for="l10n_cr_ins_fax" class="col-lg-3" />
+                                    <field name="l10n_cr_ins_fax" />
+                                </div>
+                                <div class="row">
+                                    <label for="l10n_cr_ins_header" class="col-lg-3" />
+                                    <field name="l10n_cr_ins_header" />
+                                    <label for="l10n_cr_ins_email" class="col-lg-3" />
+                                    <field name="l10n_cr_ins_email" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="hr_payslip_configuration"
+                        title="The parameters to configure the Payslip."
+                    >
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Optional Features</span>
+                            <div class="text-muted">
+                                Activate optional features for the Costa Rica payroll
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="l10n_cr_holidays_provision" class="col-lg-6 o_light_label" />
+                                    <field name="l10n_cr_holidays_provision" class="text-left oe_inline" />
+                                    <div class="text-muted col-lg-12">
+                                        If it is checked, a holiday provision will be saved. A proportional amount will be saved in each payslip.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="l10n_cr_retroactive_payment" class="col-lg-6 o_light_label" />
+                                    <field name="l10n_cr_retroactive_payment" class="text-left oe_inline" />
+                                    <div class="text-muted col-lg-12">
+                                        If checked, the employee will receive retroactive for annual salary increase.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="l10n_cr_pay_wage_from_changes_date" class="col-lg-6 o_light_label" />
+                                    <field name="l10n_cr_pay_wage_from_changes_date" class="text-left oe_inline" />
+                                    <div class="text-muted col-lg-12">
+                                        If it is checked, when an employee receives a salary change, that wage will start to be paid from the date the changes was made.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

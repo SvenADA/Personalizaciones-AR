@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<odoo>
+    <data noupdate="0">
+        <record id="inherited_hr_attendance_view_form" model="ir.ui.view">
+            <field name="name">hr.attendance.form</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='check_out']" position="after">
+                    <label for="provincia"/>
+                    <div class="o_row" name="province_container">
+                        <field name="provincia" nolabel="1"/>
+                    </div>
+
+                    <label for="canton"/>
+                    <div class="o_row" name="canton_container">
+                        <field name="canton" nolabel="1"/>
+                    </div>
+
+                    <label for="distrito"/>
+                    <div class="o_row" name="distrito_container">
+                        <field name="distrito" nolabel="1"/>
+                    </div>
+
+                    <label for="direccion"/>
+                    <div class="o_row" name="direccion_container">
+                        <field name="direccion" nolabel="1"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

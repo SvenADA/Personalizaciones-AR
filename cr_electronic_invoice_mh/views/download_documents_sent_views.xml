@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_download_documents_sent" model="ir.ui.view">
+            <field name="name">Consultar Facturas Registradas en MH</field>
+            <field name="model">download.documents.sent</field>
+            <field name="arch" type="xml">
+                <form string="Consulta de facturas" class="oe_form_configuration">
+                    <header>
+                        <button string="Consultar" type="object" name="download_document_sent"/>
+                    </header>
+                    <sheet>
+                        <separator string="Consulta de facturas registradas en Ministerio de Hacienda"/>
+                        <separator string="Se realiza una petición a MH para descargar información básica de las facturas enviadas y registradas" style="font-size: 12px;"/><br/>
+                        <group>
+                            <group attrs="{'invisible':[('consult_invoce', '!=', False)]}">
+                                <field name="partner_id" options="{'no_create': True}"/>
+                                <field name="limit"/>
+                                <field name="offset"/>
+                            </group>
+                            <group>
+                                <field name="consult_invoce" />
+                                <field name="invoice_id" attrs="{'invisible':[('consult_invoce', '=', False)]}" options="{'no_create': True}" domain="[('number_electronic', '!=', False)]"/>
+                                <field name="number_electronic" attrs="{'invisible':[('consult_invoce', '=', False)]}"/>
+                            </group>
+                        </group>
+                        <field name="lines_ids" widget="one2many_list" nolabel="1" readonly="1">
+                                <tree create="false" delete="false" editable="false">
+                                    <field name="invoice_id"/>
+                                    <field name="number_electronic"/>
+                                    <field name="partner"/>
+                                    <field name="date"/>
+                                </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_download_documents_sent_line" model="ir.ui.view">
+            <field name="name">Vista para descargar los comprobantes electronicos Lineas</field>
+            <field name="model">download.documents.sent.lines</field>
+            <field name="arch" type="xml">
+                <form string="Consulta de comprobantes" class="oe_form_configuration">
+                    <sheet>
+                        <group>
+                            <field name="invoice_id"/>
+                            <field name="number_electronic"/>
+                            <field name="partner"/>
+                            <field name="date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_download_documents_sent" model="ir.actions.act_window">
+            <field name="name">Consultar Facturas Registradas en MH</field>
+            <field name="res_model">download.documents.sent</field>
+            <field name="view_mode">form</field>
+            <!--Hace que desaparesca los botones automaticos de odoo como crear y guardar  target-->
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem
+                id="menu_download_documents_parent"
+                name="Facturación Electrónica"
+                parent="account.menu_finance_reports"
+                sequence="0"
+        />
+
+        <menuitem
+                id="menu_download_documents_sent"
+                name="Consultar Facturas Registradas en MH"
+                parent="cr_electronic_invoice_mh.menu_download_documents_parent"
+                action="action_download_documents_sent"
+                sequence="0"
+        />
+        
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_company_form_inherit_mh" model="ir.ui.view">
+			<field name="name">res.company.form.inherit.mh</field>
+			<field name="model">res.company</field>
+			<field name="inherit_id" ref="base.view_company_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='to_update_user']" position="after">
+					<button name="check_connection" type="object" string="Comprobar Conexión a MH"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_category_search_view" model="ir.ui.view">
+            <field name="name">product.category.search</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_search_view"/>
+            <field name="arch" type="xml">
+
+                <field name="parent_id" position="after">
+                    <field name="cabys_code"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record id="cr_electronic_product_category_form_view" model="ir.ui.view">
+            <field name="name">cr.electronic.product.category.form.view</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+
+                <group name="first" position="after">
+
+                    <group string="Facturación Electrónica" >
+                        <group>
+                            <div colspan="2" class="o_row" name="div_cabys_code">
+                                <button name="action_search_cabys" string="Buscar Cabys (Odoo)" type="object" icon="fa-search" class="oe_link oe_inline"/>
+                                <a style="font-weight: 500;" class="oe_link oe_inline"
+                                   href="https://app.powerbi.com/view?r=eyJrIjoiZDdmNTBlYTktYmE0Ni00NGM3LWJhNzYtMGZhNjBlNTQyYTdmIiwidCI6IjYxOGQwYTQ1LTI1YTYtNDYxOC05ZjgwLThmNzBhNDM1ZWU1MiJ9"
+                                   target="_blank"><i class="fa fa-search" ></i> Buscar Cabys (Sitio Web)</a>
+                            </div>
+                            <field name="cabys_code" required="0" placeholder="0119500000100"/>
+                            <field name="cabys_description"/>
+                        </group>
+                    </group>
+
+                </group>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

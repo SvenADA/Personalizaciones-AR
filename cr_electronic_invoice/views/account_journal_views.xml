@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_journal_inherit_form" model="ir.ui.view">
+            <field name="name">account.journal.form.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                
+                <field name="type" position="after">
+					<field name="electronic_invoice" />
+				</field>
+
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Facturación Electrónica" name="electronic_invoice" attrs="{'invisible':['|', ('electronic_invoice', '=', False), ('type','not in', ('sale', 'purchase'))]}">
+                        <group>
+                            <group string="Secuencia de Ubicación">
+                                <field name="sucursal" attrs="{'invisible':[('type','!=','sale'),('type','!=','purchase')],'required':[('type','=','sale'), ('electronic_invoice','=', True)]}" placeholder="001"/>
+                                <field name="terminal" attrs="{'invisible':[('type','!=','sale'),('type','!=','purchase')],'required':[('type','=','sale'), ('electronic_invoice','=', True)]}" placeholder="00001"/>
+                            </group>
+                            <group string="Secuencias de Documentos">
+                                <field name="electronic_invoice_sequence_id" attrs="{'invisible':[('type','!=','sale')],'required':[('type','=','sale'), ('electronic_invoice','=', True)]}"/>
+                                <field name="ticket_sequence_id" attrs="{'invisible':[('type','!=','sale')],'required':[('type','=','sale'), ('electronic_invoice','=', True)]}"/>
+                                <field name="export_invoice_sequence_id" attrs="{'invisible':[('type','!=','sale')],'required':[('type','=','sale'), ('electronic_invoice','=', True)]}"/>
+                                <field name="debit_note_sequence_id" attrs="{'invisible':[('type','!=','sale')],'required':[('type','=','sale'), ('electronic_invoice','=', True)]}"/>
+                                <field name="credit_note_sequence_id" attrs="{'invisible':[('type','!=','sale')],'required':[('type','=','sale'), ('electronic_invoice','=', True)]}"/>
+
+                                <field name="purchase_invoice_sequence_id" attrs="{'invisible':[('type','!=','purchase')],'required':[('type','=','purchase'), ('electronic_invoice','=', True)]}"/>
+                                <field name="sequence_electronic_invoice_provider" attrs="{'invisible':[('type','!=','purchase')],'required':[('type','=','purchase'), ('electronic_invoice','=', True)]}"/>
+                                <field name="partial_acceptance_sequence_id" attrs="{'invisible':[('type','!=','purchase')],'required':[('type','=','purchase'), ('electronic_invoice','=', True)]}"/>
+                                <field name="rejection_sequence_id" attrs="{'invisible':[('type','!=','purchase')],'required':[('type','=','purchase'), ('electronic_invoice','=', True)]}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

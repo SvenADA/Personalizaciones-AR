@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_fe_special_tags_company_line" model="ir.ui.view">
+            <field name="name">Lineas de otro texto compania</field>
+            <field name="model">fe.special.tags.company.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="element"/>
+                            <field name="code"/>
+                            <field name="content_label"/>
+                            <field name="content"/>
+                            <field name="required"/>
+                            <field name="read_only"/>
+                            <field name="read_only_content"/>
+                            <field name="python_code"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_fe_special_tags_partner_line" model="ir.ui.view">
+            <field name="name">Lineas de otro texto cliente</field>
+            <field name="model">fe.special.tags.partner.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="element"/>
+                            <field name="code"/>
+                            <field name="content_label"/>
+                            <field name="content"/>
+                            <field name="required"/>
+                            <field name="read_only_content"/>
+                            <field name="read_only"/>
+                            <field name="python_code"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_fe_special_tags_invoice_line" model="ir.ui.view">
+            <field name="name">Lineas de otro texto factura</field>
+            <field name="model">fe.special.tags.invoice.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="content_label"/>
+                            <field name="content"/>
+                            <field name="element"/>
+                            <field name="code"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

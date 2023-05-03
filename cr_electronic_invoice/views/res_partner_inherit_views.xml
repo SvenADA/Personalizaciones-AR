@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_res_partner_select_inherit" model="ir.ui.view">
+            <field name="name">res.partner.select.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field string="Cédula" name="ref"/>
+                    <field name="commercial_name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_res_partner_kanban" model="ir.ui.view">
+            <field name="name">res.partner.kanban</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="ref"/>
+                    <field name="commercial_name"/>
+                </xpath>
+                <xpath expr="//templates//field[@name='display_name']/.." position="after">
+                    <div class="oe_inline" name="commercial_name_div" attrs="{'invisible': [('commercial_name','=', False)]}">
+                        <field name="commercial_name"/>
+                    </div>
+                    <div class="oe_inline" name="ref_div" attrs="{'invisible': [('ref','=', False)]}">
+                        <span>Cédula: </span>
+                        <field string="Cédula" name="ref"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="ref" string="Cédula" optional="show"/>
+                    <field name="commercial_name" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="action_consult_res_partner" string="Consultar en MH" type="object" class="oe_highlight" />
+                    </header>
+                </xpath>
+
+                <xpath expr="//field[@name='ref']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='type']/.." position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//div[hasclass('o_address_format')]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Contactos y direcciones-->
+                <xpath expr="//field[@name='child_ids']//form//field[@name='name']" position="after">
+                    <field name="identification_id" widget="selection" attrs="{'invisible': [('type', 'in', ('delivery', 'private'))]}"/>
+                    <field name="ref" string="Cédula" help="Sin espacios ni guiones, Física - 9 dígitos, Jurídica - 10 dígitos, DIMEX - 11 a 12 dígitos, NITE - 10 dígitos, Extranjero - 10 a 20 dígitos" attrs="{'invisible': [('type', 'in', ('delivery', 'private'))]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//label[@for='street']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']" position="attributes">
+                    <attribute name="context">{'default_county_id': county_id, 'default_district_id': district_id, 'default_neighborhood_id': neighborhood_id, 'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'other'}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//div[@name='div_address']/.." position="replace">
+                    <field name="country_code" invisible="1"/>
+
+                    <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" />
+                    <field name="state_id" string="Provincia" class="o_address_state" placeholder="Provincia" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                    <field name="city" placeholder="City" class="o_address_city" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)], 'invisible': [('country_code', '=', 'CR')]}"/>
+                    <field name="county_id" class="o_address_state" placeholder="Cantón" domain="[('state_id', '=', state_id)]" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'invisible': [('country_code', '!=', 'CR')]}"/>
+                    <field name="district_id" placeholder="Distrito" domain="[('county_id', '=', county_id)]" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'invisible': [('country_code', '!=', 'CR')]}"/>
+                    <field name="neighborhood_id" placeholder="Barrio" domain="[('district_id', '=', district_id)]" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'invisible': [('country_code', '!=', 'CR')]}"/>
+                    <field name="zip" force_save="1" placeholder="ZIP" string="Código postal" class="o_address_zip" attrs="{'readonly': ['|', ('district_id', '!=', False), '&amp;', ('type', '=', 'contact'), ('parent_id', '!=', False)]}"/>
+                    <field name="street" string="Dirección exacta" placeholder="Dirección exacta" class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" />
+                    <field name="street2" string="Otras señas" placeholder="Otras señas" class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" />
+                </xpath>
+
+                <!-- Contactos y direcciones-->
+
+                <xpath expr="//field[@name='type']/.." position="after">
+                    <field name="type" attrs="{'invisible': [('is_company','=', True)], 'required': [('is_company','!=', True)], 'readonly': [('user_ids', '!=', [])]}" class="font-weight-bold"/>
+                    <field name="identification_id" widget="selection" attrs="{'invisible': [('type', 'in', ('delivery', 'private'))]}"/>
+                    <field name="ref" string="Cédula" help="Sin espacios ni guiones, Física - 9 dígitos, Jurídica - 10 dígitos, DIMEX - 11 a 12 dígitos, NITE - 10 dígitos, Extranjero - 10 a 20 dígitos" attrs="{'invisible': [('type', 'in', ('delivery', 'private'))]}"/>
+                    <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                    <field name="state_id" string="Provincia" class="o_address_state" placeholder="Provincia" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                    <field name="city" placeholder="City" class="o_address_city" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)], 'invisible': [('country_code', '=', 'CR')]}"/>
+                    <field name="county_id" class="o_address_state" placeholder="Cantón" domain="[('state_id', '=', state_id)]" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'invisible': [('country_code', '!=', 'CR')]}"/>
+                    <field name="district_id" placeholder="Distrito" domain="[('county_id', '=', county_id)]" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'invisible': [('country_code', '!=', 'CR')]}"/>
+                    <field name="neighborhood_id" placeholder="Barrio" domain="[('district_id', '=', district_id)]" options="{'no_open': 1,'no_create': 1, 'no_edit': 1}" attrs="{'invisible': [('country_code', '!=', 'CR')]}"/>
+                    <field name="zip" force_save="1" placeholder="ZIP" string="Código postal" class="o_address_zip" attrs="{'readonly': ['|', ('district_id', '!=', False), '&amp;', ('type', '=', 'contact'), ('parent_id', '!=', False)]}"/>
+                    <field name="street" string="Dirección exacta" placeholder="Dirección exacta" class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" />
+                    <field name="street2" string="Otras señas" placeholder="Otras señas" class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" />
+                </xpath>
+
+                <field name="function" position="after">
+                    <field name="commercial_name"/>
+                    <field name="fax_code"/>
+                    <field name="fax"/>
+                    <field name="phone_code"/>
+                </field>
+
+                <field name="website" position="before">
+                    <field name="emails_ids" widget="one2many_list" nolabel="1" colspan="2" help="Si no hay ningún correo marcado como “Principal” se tomara en cuenta el campo “Correo electrónico” para el envió de las facturas electrónicas">
+                        <tree editable="bottom">
+                            <field name="name" required="1"/>
+                            <field name="send_mail"/>
+                            <field name="main_email"/>
+                        </tree>
+                    </field>
+                </field>
+
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Facturación Electrónica" name="electronic_invoice">
+                        <group>
+                            <group string="Facturas">
+                                <field name="payment_methods_id"/>
+                                <field name="export_invoice"/>
+                                <field name="purchase_invoice" />
+                                <field name="activity_types" widget="many2many_tags" attrs="{'invisible': [('purchase_invoice', '=', False)]}"/>
+                                <field name="activity_type" attrs="{'invisible': [('purchase_invoice', '=', False)]}" />
+                                <field name="is_special_taxpayer" />
+                                <field name="not_send_mail_fe" />
+                            </group>
+                            <group string="Comprobantes de proveedor">
+                                <field name="electronic_voucher_create_invoice"/>
+                                <field name="product_id_electronic_voucher" domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                            </group>
+                        </group>
+                        <group string="Contribuyente especial" groups="account.group_account_invoice" attrs="{'invisible':[('is_special_taxpayer','!=', True)]}">
+                            <field name="special_tags_lines" nolabel="1" widget="one2many_list" >
+                                <tree editable="bottom">
+                                    <field name="element" required="1" help="Etiqueta solicitada por el cliente para su lectura "/>
+                                    <field name="code" help="Código que provee el cliente que será utilizado para identificar el elemento. Ejemplo final en el XML: &lt;OtroTexto codigo='WMNumeroOrden'&gt;" placeholder="WMNumeroOrden" attrs="{'required': [('element', '=', 'CompraEntrega')]}"/>
+                                    <field name="read_only" help="Los campos 'Elemento' y 'Código Tecnico' se tornan no editables en facturas"/>
+                                    <field name="content_label" required="1" help="Nombre a mostrar en facturas referente al contenido solicitado. Este nombre es solo visual para orientación del colaborador sobre que dato se solicita" placeholder="Número de orden"/>
+                                    <field name="content" help="Dato predefinido. Ejemplo final en el xml: &lt;OtroTexto codigo='WMNumeroOrden'&gt;7700356541&lt;/OtroTexto&gt;"/>
+                                    <field name="read_only_content" help="El campo 'Contenido' se torna de solo lectura"/>
+                                    <field name="required" help="El campo 'Contenido' se torna requerido"/>
+                                    <field name="python_code" optional="hide" help="Se ejecutará el código python y se pondrá el resultado en el campo ‘Contenido’ cuando se cree la factura." placeholder="inv.name or inv.ref" groups="cr_electronic_invoice.electronic_invoice_settings"/>
+                                    <field name="add_in" help="Indica en que documento se tiene que agregar el elemento, si está vacío se agrega en ambos"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+id,sale_conditions_id:id
+account.account_payment_term_immediate,SaleConditions_1
+account.account_payment_term_15days,SaleConditions_2
+account.account_payment_term_21days,SaleConditions_2
+account.account_payment_term_30days,SaleConditions_2
+account.account_payment_term_45days,SaleConditions_2
+account.account_payment_term_2months,SaleConditions_2
+account.account_payment_term_end_following_month,SaleConditions_2
+account.account_payment_term_advance_60days,SaleConditions_2
+
+
+
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_purchase_invoice_wizard" model="ir.ui.view">
+            <field name="name">Wizard para crear factura de proveedor</field>
+            <field name="model">purchase.invoice.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="text-muted" invisible="context.get('configured_product', False)">
+                            En cada proveedor es posible configurar un producto por defecto en la pestaña “Facturación electrónica”, esto permitirá rellenar las líneas con un producto genérico y una cuenta contable.
+                        </div>
+                        <group>
+                            <field name="line_ids" nolabel="1" widget="one2many_list">
+                                <tree editable="bottom" delete="0" create="0">
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="detail" readonly="1"/>
+                                    <field name="product_id" required="1" domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                                    <field name="account_id" required="1" domain="[('deprecated','=',False)]"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <footer>
+                            <button string="Crear" name="create_invoice" type="object" class="oe_highlight"/>
+                            <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_purchase_invoice_wizard" model="ir.actions.act_window">
+            <field name="name">Factura de proveedor</field>
+            <field name="res_model">purchase.invoice.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

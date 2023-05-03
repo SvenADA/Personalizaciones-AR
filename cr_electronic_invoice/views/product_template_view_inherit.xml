@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_template_search_view" model="ir.ui.view">
+            <field name="name">product.template.search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="cabys_code"/>
+                    <field name="categ_id" string="Código Cabys de categoria" filter_domain="[('categ_id.cabys_code', 'ilike', self)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.product.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+
+                <field name="taxes_id" position="attributes">
+                    <attribute name="attrs">{'required':[('sale_ok','=', True)]}</attribute>
+                </field>
+
+                <xpath expr="//page[last()]" position="after" >
+                    <page string="Facturación Electrónica" name="electronic_invoice">
+                        <group>
+                            <group string="Datos generales">
+                                <field name="code_type_id" required="1" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                <field name="commercial_measurement"/>
+                                <field name="tariff_item" placeholder="Número de 12 dígitos"/>
+                                <field name="return_iva" attrs="{'invisible':[('type','!=', 'service')]}"/>
+                            </group>
+                            <group string="Cabys">
+                                <div colspan="2" class="o_row" name="div_cabys_code">
+                                    <button name="action_search_cabys" string="Buscar Cabys (Odoo)" type="object" icon="fa-search" class="oe_link oe_inline"/>
+                                    <a style="font-weight: 500;" class="oe_link oe_inline"
+                                       href="https://app.powerbi.com/view?r=eyJrIjoiZDdmNTBlYTktYmE0Ni00NGM3LWJhNzYtMGZhNjBlNTQyYTdmIiwidCI6IjYxOGQwYTQ1LTI1YTYtNDYxOC05ZjgwLThmNzBhNDM1ZWU1MiJ9"
+                                       target="_blank"><i class="fa fa-search" ></i> Buscar Cabys (Sitio Web)</a>
+                                </div>
+                                <field name="cabys_code" required="0" placeholder="0119500000100"/>
+                                <field name="cabys_description"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

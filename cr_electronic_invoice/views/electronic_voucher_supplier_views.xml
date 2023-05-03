@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="electronic_voucher_supplier_tree_view" model="ir.ui.view">
+        <field name="name">Comprobantes</field>
+        <field name="model">electronic.voucher.supplier</field>
+        <field name="arch" type="xml">
+            <tree string="Comprobante" decoration-info = "state_tributacion==False" decoration-warning = "state_tributacion == 'rechazado'" decoration-danger = "state_tributacion in ('enviado_error', 'no_encontrado', 'error', 'consultar_error')">
+                <field name="company_id" optional="hide"/>
+                <field name="consecutive_number_receiver" string="Consecutivo Receptor" optional="show"/>
+                <field name="validate_date" readonly="1" optional="show" />
+                <field name="invoice_id"/>
+                <field name="date_presentation" optional="show" />
+                <field name="supplier_xml" string="Emisor (Proveedor)"/>
+                <field name="consecutive_number_xml" readonly="1" string="Consecutivo XML"/>
+                <field name="currency" optional="show"/>
+                <field name="amount_total_electronic_invoice" optional="show"/>
+                <field name="accredit_tax" optional="hide"/>
+                <field name="applicable_expenditure" optional="hide"/>
+                <field name="state_invoice_partner"/>
+                <field name="state_tributacion" widget="badge" decoration-success="state_tributacion == 'aceptado'" decoration-info="state_tributacion in ('procesando', 'enviado', 'esperando')"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_electronic_voucher_supplier" model="ir.ui.view">
+        <field name="name">Comprobantes Electrónicos de Proveedor</field>
+        <field name="model">electronic.voucher.supplier</field>
+        <field name="arch" type="xml">
+            <form duplicate="0">
+                <header>
+                    <button string="Validar" type="object" name="validate_xml" attrs="{'invisible':[('state_tributacion', '!=', False)]}" class="oe_highlight"/>
+                    <button name="action_create_invoice" string="Crear Factura de Proveedor" type="object" attrs="{'invisible':['|', ('invoice_id', '!=', False), ('xml_supplier_approval', '=', False)]}"/>
+                    <button name="create_provider" string="Crear contacto de proveedor" type="object" attrs="{'invisible':['|', ('partner_id', '!=', False), ('xml_supplier_approval', '=', False)]}"/>
+                </header>
+                <sheet>
+                    <label for="consecutive_number_receiver" style="color:green;font-size: 20px;float:right;border: 1px solid green;padding:5px" string="Aceptada" attrs="{'invisible':[('state_tributacion','!=','aceptado')]}" />
+                    <label for="consecutive_number_receiver" style="color:orange;font-size: 20px;float:right;border: 1px solid orange;padding:5px" string="Rechazada" attrs="{'invisible':[('state_tributacion','!=','rechazado')]}" />
+                    <label for="consecutive_number_receiver" style="color:blue;font-size: 20px;float:right;border: 1px solid blue;padding:5px" string="Esperando envio" attrs="{'invisible':[('state_tributacion','!=','esperando')]}" />
+                    <label for="consecutive_number_receiver" style="color:#006699;font-size: 20px;float:right;border: 1px solid #006699;padding:5px" string="Enviado" attrs="{'invisible':[('state_tributacion','!=','enviado')]}" />
+                    <label for="consecutive_number_receiver" style="color:#006699;font-size: 20px;float:right;border: 1px solid #006699;padding:5px" string="Procesando" attrs="{'invisible':[('state_tributacion','!=','procesando')]}" />
+                    <label for="consecutive_number_receiver" style="color:#006699;font-size: 20px;float:right;border: 1px solid #006699;padding:5px" string="Recibido" attrs="{'invisible':[('state_tributacion','!=','recibido')]}" />
+                    <label for="consecutive_number_receiver" style="color:red;font-size: 20px;float:right;border: 1px solid red;padding:5px" string="Error" attrs="{'invisible':[('state_tributacion','not in',('enviado_error','conexion_error', 'error'))]}" />
+                    <label for="consecutive_number_receiver" style="color:green;font-size: 20px;float:right;border: 1px solid green;padding:5px" string="Borrador" attrs="{'invisible':[('state_tributacion','!=', False)]}" />
+                    <label for="consecutive_number_receiver" style="color:gray;font-size: 20px;float:right;border: 1px solid gray;padding:5px" string="No presentable" attrs="{'invisible':[('state_tributacion','!=','not_presentable')]}" />
+
+                    <label for="consecutive_number_receiver" style="color:green;font-size: 20px;float:right;border: 1px solid green;padding:5px" string="Comprobante Electrónico" />
+                    <h1><field name="consecutive_number_receiver"/></h1>
+                    <group>
+                        <group style="width: 100%;">
+                            <field name="fname_xml_supplier_approval" invisible="1"/>
+                            <field name="xml_supplier_approval" filename="fname_xml_supplier_approval" attrs="{'readonly':[('state_tributacion', '!=', False)]}" required="1"/>
+                        </group>
+                        <group>
+                            <field name="company_id" readonly="1" string="Compañía receptora" force_save="1" invisible="0"/>
+                            <field name="state_invoice_partner" attrs="{'readonly':[('state_tributacion', '!=', False)]}" required="1"/>
+                            <field name="reason_rejection" attrs="{'readonly':[('state_tributacion', '!=', False)], 'required':[('state_invoice_partner', 'in', ('2', '3'))], 'invisible':[('state_invoice_partner', 'in', ('1', False))]}"/>
+                            <field name="journal_id" attrs="{'readonly':[('state_tributacion', '!=', False)]}" required="1" options="{'no_create': True, 'no_edit': True}"/>
+                            <field name="invoice_id" domain="[('partner_id', '=', partner_id), ('move_type', '=', 'in_invoice')]" attrs="{'readonly':[('state_tributacion', '!=', False)]}" options="{'no_create': True, 'no_edit': True}" invisible="context.get('from_invoice', False)"/>
+                            <field name="date_presentation" readonly="0" required="1"/>
+                        </group>
+                        <group>
+                            <field name="activity_type" attrs="{'readonly':[('state_tributacion', '!=', False)], 'invisible':[('invisible_expenditure_accredit', '!=', False)], 'required':[('invisible_expenditure_accredit', '=', False)]}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="invisible_expenditure_accredit" invisible="1"/>
+                            <field name="iva_condition_id" attrs="{'readonly':[('state_tributacion', '!=', False)], 'invisible':[('state_invoice_partner', '=', '3')]}" required="1" options="{'no_open': True, 'no_create' : True}"/>
+                            <field name="accredit_tax" attrs="{'readonly':[('state_tributacion', '!=', False)], 'invisible':[('invisible_expenditure_accredit', '!=', False)]}" required="1"/>
+                            <field name="applicable_expenditure" readonly ="1" force_save="1" attrs="{'invisible':[('invisible_expenditure_accredit', '!=', False)]}"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Datos cargados del xml">
+                            <group >
+                                <field name="type_document" readonly="1" force_save="1"/>
+                                <field name="consecutive_number_xml" readonly="1" force_save="1"/>
+                                <field name="number_electronic" readonly="1" force_save="1"/>
+                            </group>
+                            <group >
+                                <group>
+                                    <field name="partner_id" domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]" attrs="{'readonly':[('state_tributacion', '!=', False)]}"/>
+                                    <field name="supplier_xml" readonly="1" force_save="1"/>
+                                    <field name="supplier_ref_xml" readonly="1" force_save="1"/>
+                                </group>
+                                <group >
+                                    <field name="date_issuance" readonly="1" force_save="1"/>
+                                    <field name="currency" readonly="1" force_save="1"/>
+                                    <field name="exchange_rate" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+                            <h3 style="width: 100%;border-bottom: 1px solid #e4e4e4; ">Lineas de Factura</h3>
+                            <field name="electronic_voucher_line_ids" nolabel="1" readonly="1" widget="one2many_list" force_save="1">
+                                <tree create="false" delete="false" editable="false">
+                                    <field name="detail"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_measurement" optional="show"/>
+                                    <field name="unit_price"/>
+                                    <field name="discount" optional="show"/>
+                                    <field name="sub_total"/>
+                                    <field name="taxs"/>
+                                    <field name="tax_type_rate_ids" widget="many2many_tags" optional="show"/>
+                                    <field name="total_tax_amount" optional="show"/>
+                                    <field name="amount_total_line"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="detail"/>
+                                            <field name="quantity"/>
+                                            <field name="unit_measurement"/>
+                                            <field name="unit_price"/>
+                                            <field name="discount"/>
+                                        </group>
+                                        <group>
+                                            <field name="sub_total"/>
+                                            <field name="taxs"/>
+                                            <field name="tax_type_rate_ids" widget="many2many_tags"/>
+                                            <field name="total_tax_amount"/>
+                                            <field name="amount_total_line"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total_other_charges" readonly="1" force_save="1"/>
+                                <field name="amount_tax_electronic_invoice" force_save="1"/>
+                                <field name="amount_total_electronic_invoice" force_save="1"/>
+                            </group>
+
+                        </page>
+                        <page string="Otros Datos">
+                            <field name="other_information_line_ids" nolabel="1" readonly="1" widget="one2many_list" force_save="1">
+                                <tree create="false" delete="false" editable="false">
+                                    <field name="hierarchy_sequence" optional="show"/>
+                                    <field name="label" optional="show"/>
+                                    <field name="code" optional="show"/>
+                                    <field name="content"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="hierarchy_sequence"/>
+                                            <field name="label"/>
+                                            <field name="code"/>
+                                        </group>
+                                        <group>
+                                            <field name="content"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+
+                        <page string="Estado de envio">
+                            <group>
+                                <field name="validate_date" readonly="1"/>
+                                <field name="state_tributacion" readonly="1"/>
+                                <field name="fname_xml_comprobante" invisible="1" readonly="1"/>
+                                <field name="xml_comprobante" filename="fname_xml_comprobante" readonly="1"/>
+                                <field name="fname_xml_respuesta_tributacion" invisible="1"/>
+                                <field name="xml_respuesta_tributacion" filename="fname_xml_respuesta_tributacion" readonly="1"/>
+                                <field name="electronic_invoice_return_message" readonly="1" attrs="{'invisible':[('electronic_invoice_return_message', '=', False)]}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_electronic_voucher_supplier_filter" model="ir.ui.view">
+        <field name="name">electronic.voucher.supplier.select</field>
+        <field name="model">electronic.voucher.supplier</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="consecutive_number_receiver" string="Consecutivo Receptor"/>
+                <field name="consecutive_number_xml" string="Consecutivo del XML cargado"/>
+                <field name="number_electronic" string="Numero electrónico del XML cargado"/>
+                <field name="supplier_xml" string="Emisor del XML cargado"/>
+                <field name="supplier_ref_xml" string="Identificación del Emisor del XML cargado"/>
+                <field name="state_tributacion"/>
+                <field name="other_information_line_ids" string="Otros datos (Contenido)" filter_domain="[('other_information_line_ids.content', 'ilike', self)]"/>
+                <filter string="Comprobantes sin enviar" name="state_tributacion_false" domain="[('state_tributacion','=', False)]"/>
+                <filter string="Comprobantes sin enviar último mes" name="state_tributacion_false_last_days" domain="[('state_tributacion','=', False), ('create_date', '>=', (datetime.datetime.combine(context_today() - relativedelta(days=31), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                <group expand="0" string="Group By">
+                    <filter name="state_tributacion_id"  string='Estado Comprobante Electrónico' context="{'group_by':'state_tributacion'}"/>
+                    <filter name="date_presentation_id"  string='Fecha de presentación' context="{'group_by':'date_presentation'}"/>
+                    <filter name="partner_id_id"  string='Proveedor' context="{'group_by':'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_electronic_voucher_supplier">
+        <field name="name">Comprobantes Electrónicos de Proveedor</field>
+        <field name="res_model">electronic.voucher.supplier</field>
+        <field name="domain">[('xml_supplier_approval','!=', False)]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="rule_electronic_voucher_supplier_multi_company" model="ir.rule">
+        <field name="name">Comprobantes Electrónicos de Proveedor</field>
+        <field ref="model_electronic_voucher_supplier" name="model_id"/>
+        <field name="domain_force">['|', ('company_id' ,'=', False), ('company_id' , 'in', company_ids)]</field>
+    </record>
+
+    <record id="create_vendor_invoice_wizard_view" model="ir.ui.view">
+        <field name="name">create.vendor.invoice.wizard.view</field>
+        <field name="model">create.vendor.invoice.wizard</field>
+        <field name="arch" type="xml">
+            <form >
+                <p>
+                    Se procederá a crear una factura de proveedor a los comprobantes seleccionados. <br/><br/>
+
+                    **Las facturas de proveedor son  creadas con información básica, por favor proceder a revisar y completar la factura.
+                </p>
+                <footer>
+                    <button string="Generar facturas" name="create_vendor_invoices" type="object" default_focus="1"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_vendor_invoice_wizard_from_list" model="ir.actions.server">
+        <field name="name">Crear Factura de Proveedor</field>
+        <field name="model_id" ref="cr_electronic_invoice.model_create_vendor_invoice_wizard"/>
+        <field name="binding_model_id" ref="cr_electronic_invoice.model_electronic_voucher_supplier"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = model.action_vendor_invoices()
+        </field>
+    </record>
+
+    <record id="action_validate_xml_from_list" model="ir.actions.server">
+        <field name="name">Validar comprobantes</field>
+        <field name="model_id" ref="cr_electronic_invoice.model_electronic_voucher_supplier"/>
+        <field name="binding_model_id" ref="cr_electronic_invoice.model_electronic_voucher_supplier"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            model.validate_xml_from_list()
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_electronic_voucher_supplier"
+            name="Comprobantes Electrónicos"
+            parent="account.menu_finance_payables"
+            action="action_electronic_voucher_supplier"
+    />
+
+</odoo>

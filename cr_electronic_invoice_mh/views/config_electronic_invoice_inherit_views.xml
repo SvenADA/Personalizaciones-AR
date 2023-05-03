@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_config_electronic_invoice_inherit_mh" model="ir.ui.view">
+			<field name="name">Mode de conexion FE</field>
+			<field name="model">config.electronic.invoice</field>
+			<field name="inherit_id" ref="cr_electronic_invoice.view_config_electronic_invoice"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='debug']" position="after">
+					<group name="connection" string="Conexión al Ministerio de Hacienda">
+						<field name="connection_mode" widget="radio"/>
+					</group>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

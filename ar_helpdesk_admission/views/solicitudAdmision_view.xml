@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- Vista Formulario para Solicitud de Admisión -->
+
+    <record id="solicitud_admision_form_view" model="ir.ui.view">
+        <field name="name">solicitud_admision.form.view</field>
+        <field name="model">solicitud_admision</field>
+        <field name="arch" type="xml">
+            <form string="Solicitud Admisión">
+                <header>
+                    <!--<button name="accion_rfq_envio" states="draft" string="Enviar por Correo Electrónico" type="object" context="{'envio_rfq':True}" class="oe_highlight"/>
+                    <button name="print_cotizacion" string="Imprimir SDC" type="object" states="draft" class="oe_highlight" groups="base.group_user"/>
+                    <button name="button_confirm" type="object" states="sent" string="Confirmar Pedido" class="oe_highlight" id="bid_confirm"/>
+                    <button name="accion_rfq_envio" states="sent" string="Reenviar por Correo Electrónico" type="object" context="{'envio_rfq':True}"/>
+                    <button name="print_cotizacion" string="Imprimir SDC" type="object" states="sent" groups="base.group_user"/>
+                    <button name="button_confirm" type="object" states="draft" string="Confirmar Pedido" id="draft_confirm"/>
+                    <button name="button_draft" states="cancel" string="Cambiar a Borrador" type="object" />
+                    <button name="button_cancel" states="draft,to approve,sent,purchase" string="Cancelar" type="object" />
+                    <button name="button_done" type="object" string="Bloquear" states="purchase"/>
+                    <button name="button_unlock" type="object" string="Desbloquear" states="done" groups="purchase.group_purchase_manager"/>-->
+                </header>
+
+                <sheet>
+                     <group>
+                         <group col="2">
+                             <field name="num_identificacion" required="True" placeholder="1 1111 1111"/>
+                             <field name="nombre" required="True"/>
+                             <field name="primer_apellido" required="True"/>
+                             <field name="segundo_apellido" required="True"/>
+                             <field name="genero" required="True"/>
+                             <field name="fecha_nacimiento" required="True" widget="date"/>
+                         </group>
+
+                         <group  col="2">
+                             <field name="patrono" required="True"/>
+                             <field name="actividad_empresa" required="True"/>
+                             <field name="puesto" required="True"/>
+                             <field name="ingreso_bruto" required="True"/>
+                             <field name="ingreso_liquido" required="True"/>
+                         </group>
+                     </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+<!-- Vista Lista para Solicitud de Admisión -->
+    <record id="solicitud_admision_tree_view" model="ir.ui.view">
+        <field name="name">solicitud_admision.tree.view</field>
+        <field name="model">solicitud_admision</field>
+        <field name="arch" type="xml">
+            <tree string="Solicitud de Admision" multi_edit="1" sample="1">
+                <field name="num_identificacion"/>
+                <field name="nombre" readonly="1"/>
+                <field name="primer_apellido"/>
+                <field name="segundo_apellido"/>
+                <field name="genero"/>
+                <field name="fecha_nacimiento"/>
+                <field name="patrono" optional="show"/>
+                <field name="actividad_empresa" optional="show"/>
+                <field name="puesto" optional="show"/>
+                <field name="ingreso_bruto" optional="show"/>
+                <field name="ingreso_liquido" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista del Bóton en el Dashboard del Equipo Mesa de Ayuda -->
+
+    <data noupdate="0">
+
+        <record id="inherited_helpdesk_view_form" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//header//button[@name='assign_ticket_to_self']" position="after">
+                    <button name="send_form_email" string="Enviar email" type="object" class="oe_highlight" context="{'form_send':True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+</odoo>

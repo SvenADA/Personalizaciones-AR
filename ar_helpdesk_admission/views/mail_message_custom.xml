@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<odoo>
+    <data noupdate="0">
+        <record id="inherited_mail_form" model="ir.ui.view">
+            <field name="name">mail.compose.message.form</field>
+            <field name="model">mail.compose.message</field>
+            <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='subject']" position="after">
+                    <label for="note"/>
+                    <div class="o_row" name="note_container">
+                        <field name="note" placeholder="Añade una nota"></field>
+                    </div>
+
+                    <label for="share_link"/>
+                    <div class="o_row" name="share_link_container">
+                        <field name="share_link" widget="CopyClipboardChar" options="{'string': 'Copy Link'}"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="view_payment_methods_tree" model="ir.ui.view">
+			<field name="name">payment.methods.tree</field>
+			<field name="model">payment.methods</field>
+			<field name="arch" type="xml">
+				<tree string="Métodos de Pago">
+					<field name="sequence"/>
+					<field name="name"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_sale_conditions_form" model="ir.ui.view">
+			<field name="name">sale.conditions.form</field>
+			<field name="model">sale.conditions</field>
+			<field name="arch" type="xml">
+				<form string="Condiciones de venta">
+					<sheet string="Condiciones de venta">
+						<group col="4">
+							<field name="name"/>
+							<field name="sequence"/>
+						</group>
+						<group col="4">
+							<field name="active"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_mails_electronic_invoice_form" model="ir.ui.view">
+			<field name="name">mails.electronic.invoice.form</field>
+			<field name="model">mails.electronic.invoice</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name" nolabel="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_external_document_form" model="ir.ui.view">
+			<field name="name">Documento Externo</field>
+			<field name="model">external.document</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="is_electronic_invoice" required="1"/>
+							<field name="fname_electronic_voucher" invisible="1"/>
+                            <field name="electronic_voucher" filename="fname_electronic_voucher" attrs="{'invisible':[('is_electronic_invoice','=', False)]}"/>
+							<field name="number_electronic" required="1"/>
+							<field name="date_invoice" required="1"/>
+							<field name="date_issuance" invisible="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_sale_conditions_tree" model="ir.ui.view">
+			<field name="name">sale.conditions.tree</field>
+			<field name="model">sale.conditions</field>
+			<field name="arch" type="xml">
+				<tree string="Condiciones de venta">
+					<field name="sequence"/>
+					<field name="name"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_reference_code_tree" model="ir.ui.view">
+			<field name="name">reference.code.tree</field>
+			<field name="model">reference.code</field>
+			<field name="arch" type="xml">
+				<tree string="Código de referencia">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_identification_type_form" model="ir.ui.view">
+			<field name="name">identification.type.form</field>
+			<field name="model">identification.type</field>
+			<field name="arch" type="xml">
+				<form string="Tipo de identificación">
+					<sheet string="Tipo de identificación">
+						<group col="4">
+							<field name="code"/>
+							<field name="name"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_identification_type_tree" model="ir.ui.view">
+			<field name="name">identification.type.tree</field>
+			<field name="model">identification.type</field>
+			<field name="arch" type="xml">
+				<tree string="Tipo de identificación">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="notes"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_iva_condition_form" model="ir.ui.view">
+			<field name="name">iva.condition.form</field>
+			<field name="model">iva.condition</field>
+			<field name="arch" type="xml">
+				<form string="Condición del IVA">
+					<sheet string="Condición del IVA">
+						<group>
+							<field name="name" required="1"/>
+							<field name="code" required="1"/>
+							<field name="active"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_iva_condition_tree" model="ir.ui.view">
+			<field name="name">iva.condition.tree</field>
+			<field name="model">iva.condition</field>
+			<field name="arch" type="xml">
+				<tree string="Condición del IVA">
+					<field name="name"/>
+					<field name="code"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_type_reference_document_form" model="ir.ui.view">
+			<field name="name">type.reference.document.form</field>
+			<field name="model">type.reference.document</field>
+			<field name="arch" type="xml">
+				<form string="Tipo de documento de referencia">
+					<sheet string="Tipo de documento de referencia">
+						<group>
+							<field name="name" required="1"/>
+							<field name="code" required="1"/>
+							<field name="active"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_type_reference_document_tree" model="ir.ui.view">
+			<field name="name">type.reference.document.tree</field>
+			<field name="model">type.reference.document</field>
+			<field name="arch" type="xml">
+				<tree string="Tipo de documento de referencia">
+					<field name="name"/>
+					<field name="code"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_activity_code_form" model="ir.ui.view">
+			<field name="name">activity.code.form</field>
+			<field name="model">activity.code</field>
+			<field name="arch" type="xml">
+				<form string="Tipo de actividad económica">
+					<sheet string="Tipo de actividad económica">
+						<group>
+							<field name="name" required="1"/>
+							<field name="code" required="1" placeholder="741203"/>
+							<field name="active"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_activity_code_tree" model="ir.ui.view">
+			<field name="name">activity.code.tree</field>
+			<field name="model">activity.code</field>
+			<field name="arch" type="xml">
+				<tree string="Tipo de actividad económica">
+					<field name="name"/>
+					<field name="code"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_type_other_charges_form" model="ir.ui.view">
+			<field name="name">type.other.charges.form</field>
+			<field name="model">type.other.charges</field>
+			<field name="arch" type="xml">
+				<form string="Tipos de otos cargos">
+					<sheet string="Tipos de otos cargos">
+						<group>
+							<field name="name" required="1"/>
+							<field name="code" required="1"/>
+							<field name="active"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_type_other_charges_tree" model="ir.ui.view">
+			<field name="name">type.other.charges.tree</field>
+			<field name="model">type.other.charges</field>
+			<field name="arch" type="xml">
+				<tree string="Tipos de otos cargos">
+					<field name="name"/>
+					<field name="code"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_invoice_tax_type_form" model="ir.ui.view">
+			<field name="name">invoice.tax.type.form</field>
+			<field name="model">invoice.tax.type</field>
+			<field name="arch" type="xml">
+				<form string="Tipos de impuestos">
+					<sheet string="Tipos de impuestos">
+						<group>
+							<field name="name" required="1"/>
+							<field name="code" required="1"/>
+							<field name="active"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_invoice_tax_type_tree" model="ir.ui.view">
+			<field name="name">invoice.tax.type.tree</field>
+			<field name="model">invoice.tax.type</field>
+			<field name="arch" type="xml">
+				<tree string="Tipos de impuestos">
+					<field name="name"/>
+					<field name="code"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_invoice_tax_code_rate_form" model="ir.ui.view">
+			<field name="name">invoice.tax.code.rate.form</field>
+			<field name="model">invoice.tax.code.rate</field>
+			<field name="arch" type="xml">
+				<form string="Tipos de Tarifas de impuestos">
+					<sheet string="Tipos de códigos">
+						<group>
+							<field name="name" required="1"/>
+							<field name="code" required="1"/>
+							<field name="rate" required="1"/>
+							<field name="active"/>
+							<field name="notes"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_invoice_tax_code_rate_tree" model="ir.ui.view">
+			<field name="name">invoice.tax.code.rate.tree</field>
+			<field name="model">invoice.tax.code.rate</field>
+			<field name="arch" type="xml">
+				<tree string="Tipos de códigos">
+					<field name="name"/>
+					<field name="code"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_code_type_product_form" model="ir.ui.view">
+			<field name="name">code.type.product.form</field>
+			<field name="model">code.type.product</field>
+			<field name="arch" type="xml">
+				<form string="Tipos de códigos">
+					<sheet string="Tipos de códigos">
+						<group col="4">
+							<field name="code"/>
+							<field name="name"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_code_type_product_tree" model="ir.ui.view">
+			<field name="name">code.type.product.tree</field>
+			<field name="model">code.type.product</field>
+			<field name="arch" type="xml">
+				<tree string="Tipos de códigos">
+					<field name="code"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+	
+
+		<record id="account_payment_term_form_view_inherit_payment_methods" model="ir.ui.view">
+			<field name="name">Metodos de Pago</field>
+			<field name="model">account.payment.term</field>
+			<field name="inherit_id" ref="account.view_payment_term_form"/>
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="sale_conditions_id" required="1"/>
+				</field>
+			</field>
+		</record>
+
+		<record id="product_uom_form_view_inherit" model="ir.ui.view">
+			<field name="name">product.uom.form.inherit</field>
+			<field name="model">uom.uom</field>
+			<field name="inherit_id" ref="uom.product_uom_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group/group[last()]" position="after">
+                    <group string="Facturación Electrónica">
+                        <field name="code" required="1"/>
+                    </group>
+                </xpath>
+			</field>
+		</record>
+
+		<record id="view_exoneration_type_tree" model="ir.ui.view">
+			<field name="name">Tipos de documentos de exoneración</field>
+			<field name="model">exoneration.type</field>
+			<field name="arch" type="xml">
+				<tree string="Tipos de códigos">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_exoneration_type_form" model="ir.ui.view">
+			<field name="name">Tipo de documento de exoneración</field>
+			<field name="model">exoneration.type</field>
+			<field name="arch" type="xml">
+				<form string="Documentos de exoneración">
+					<sheet string="Documentos de exoneración">
+						<group col="4">
+							<field name="name"/>
+							<field name="code"/>
+							<field name="notes"/>
+							<field name="active"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_iva_condition" model="ir.actions.act_window">
+			<field name="name">Condición del IVA</field>
+			<field name="res_model">iva.condition</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="action_exoneration_type" model="ir.actions.act_window">
+			<field name="name">Tipos de documentos de exoneración</field>
+			<field name="res_model">exoneration.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="action_type_reference_document" model="ir.actions.act_window">
+			<field name="name">Tipo de documento de referencia</field>
+			<field name="res_model">type.reference.document</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="action_activity_code" model="ir.actions.act_window">
+			<field name="name">Tipo de actividad económica</field>
+			<field name="res_model">activity.code</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="action_type_other_charges" model="ir.actions.act_window">
+			<field name="name">Tipo de otros cargos</field>
+			<field name="res_model">type.other.charges</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="action_invoice_tax_type" model="ir.actions.act_window">
+			<field name="name">Tipos de impuestos</field>
+			<field name="res_model">invoice.tax.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="action_invoice_tax_code_rate" model="ir.actions.act_window">
+			<field name="name">Tipos de Tarifas de impuestos</field>
+			<field name="res_model">invoice.tax.code.rate</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="action_payment_methods" model="ir.actions.act_window">
+			<field name="name">Métodos de pago</field>
+			<field name="res_model">payment.methods</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="action_sale_conditions" model="ir.actions.act_window">
+			<field name="name">Condiciones de Venta</field>
+			<field name="res_model">sale.conditions</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="action_reference_code" model="ir.actions.act_window">
+			<field name="name">Código de Referencia</field>
+			<field name="res_model">reference.code</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="action_identification_type" model="ir.actions.act_window">
+			<field name="name">Tipo de identificación</field>
+			<field name="res_model">identification.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="action_code_type_product" model="ir.actions.act_window">
+			<field name="name">Tipos de códigos</field>
+			<field name="res_model">code.type.product</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<menuitem id="menu_electronic_invoice" name="Facturación electrónica" parent="account.menu_finance_configuration"
+				  sequence="1" groups="cr_electronic_invoice.electronic_invoice_settings"/>
+		<menuitem id="menu_payment_methods" name="Métodos de pago" parent="menu_electronic_invoice"
+				  sequence="1" action="action_payment_methods" groups="base.group_no_one"/>
+		<menuitem id="menu_sale_conditions" name="Condiciones de Venta" parent="menu_electronic_invoice"
+				  sequence="2" action="action_sale_conditions" groups="base.group_no_one"/>
+		<menuitem id="menu_reference_code" name="Código de referencia" parent="menu_electronic_invoice"
+				  sequence="4" action="action_reference_code" groups="base.group_no_one"/>
+		<menuitem id="menu_code_type_product" name="Tipos de códigos (Productos)" parent="menu_electronic_invoice"
+				  sequence="6" action="action_code_type_product" groups="base.group_no_one"/>
+		<menuitem id="menu_invoice_tax_code_rate" name="Tarifas de impuestos" parent="menu_electronic_invoice"
+				  sequence="7" action="action_invoice_tax_code_rate" groups="base.group_no_one"/>
+		<menuitem id="menu_invoice_tax_type" name="Tipos de impuestos" parent="menu_electronic_invoice"
+				  sequence="8" action="action_invoice_tax_type" groups="base.group_no_one"/>
+		<menuitem id="menu_type_other_charges" name="Tipos de otros cargos" parent="menu_electronic_invoice"
+				  sequence="9" action="action_type_other_charges" groups="base.group_no_one"/>
+		<menuitem id="menu_activity_code" name="Tipos de actividad económica" parent="menu_electronic_invoice"
+				  sequence="10" action="action_activity_code" />
+		<menuitem id="menu_type_reference_document" name="Tipos de documento de referencia" parent="menu_electronic_invoice" 
+				  sequence="11" action="action_type_reference_document" groups="base.group_no_one"/>
+		<menuitem id="menu_exoneration_type" name="Tipos de documento de exoneración o autorización" parent="menu_electronic_invoice"
+				  sequence="12" action="action_exoneration_type" groups="base.group_no_one"/>
+		<menuitem id="menu_iva_condition" name="Condición del IVA" parent="menu_electronic_invoice"
+				  sequence="13" action="action_iva_condition" groups="base.group_no_one"/>
+		
+		<menuitem id="menu_identification_type" name="Tipo de identificación" parent="contacts.menu_localisation"
+				  sequence="6" action="action_identification_type" groups="base.group_no_one"/>
+	</data>
+</odoo>

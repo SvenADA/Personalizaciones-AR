@@ -1,0 +1,14 @@
+id,name,code,active
+invoice_tax_type_1,Impuesto al valor agregado,01,True
+invoice_tax_type_2,Impuesto Selectivo de Consumo,02,True
+invoice_tax_type_3,Impuesto único a los combustivos,03,True
+invoice_tax_type_4,Impuesto específico de bebidas alcohólicas,04,True
+invoice_tax_type_5,Impuesto específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador,05,True
+invoice_tax_type_6,Impuesto a los productos de tabaco,06,True
+invoice_tax_type_7,IVA (cálculo especial),07,True
+invoice_tax_type_8,IVA Regimen de Bienes Usados (Factor),08,True
+invoice_tax_type_9,Impuesto Especifico al cemento,12,True
+invoice_tax_type_10,Sin Impuesto del IVA (Exento) (No se envía el nodo Impuesto),00,True
+invoice_tax_type_99,Otros,99,True
+
+

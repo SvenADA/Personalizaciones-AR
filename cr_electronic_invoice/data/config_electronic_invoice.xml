@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<!--Configuracion para los crons-->
+		<record id="config_electronic_invoice_1" model="config.electronic.invoice">
+			<field name="max_send_invoice">1</field>
+			<field name="max_invoice_consult">1</field>
+			<field name="max_send_supplier">1</field>
+		</record>
+	</data>
+</odoo>

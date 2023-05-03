@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="website_menu_service_request" model="website.menu">
+        <field name="name">Requests</field>
+        <field name="url">/request</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">50</field>
+    </record>
+
+    <template id="request_form">
+        <t t-call="website.layout" name="Solicitud">
+            <div id="wrap">
+                <div id="oe_structure">
+                    <div class="container">
+                        <form role="form" action="/create/request" id="request_form" method="POST">
+
+                            <div class="form-row mt-3">
+                                <div class="form-group col-md-6">
+                                    <label for="num_identificacion" class="control-label">Número de cédula</label>
+                                    <input type="text" class="form-control" name="num_identificacion" id="num_identificacion" required=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-6">
+                                <div class="form-group col-md-4">
+                                    <label for="nombre" class="control-label">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" required=""/>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="primer_apellido" class="control-label">Primer apellido</label>
+                                    <input type="text" class="form-control" name="primer_apellido" id="primer_apellido" required=""/>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="segundo_apellido" class="control-label">Segundo apellido</label>
+                                    <input type="text" class="form-control" name="segundo_apellido" id="segundo_apellido" required=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-6">
+                                <div class="form-group col-md-4">
+                                    <label for="patrono" class="control-label">Patrono</label>
+                                    <input type="text" class="form-control" name="patrono"  id="patrono" required=""/>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="actividad_empresa" class="control-label">Actividad de la empresa</label>
+                                    <input type="text" class="form-control" name="actividad_empresa"  id="actividad_empresa" required=""/>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="puesto" class="control-label">Puesto</label>
+                                    <input type="text" class="form-control" name="puesto"  id="puesto" required=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-6">
+                                <div class="form-group col-md-6">
+                                    <label for="genero">Genero</label>
+                                    <select name="genero" id="genero" class="form-control" required="">
+                                        <option selected="selected">Selecciona una opción</option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                                    <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="form-control o_website_form_input o_website_form_date" required=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-6">
+                                <div class="form-group col-md-6">
+                                    <label for="ingreso_bruto">Ingreso bruto</label>
+                                    <input name="ingreso_bruto"  id="ingreso_bruto" class="form-control o_website_form_input" widget="monetary" required=""/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ingreso_liquido">Ingreso líquido</label>
+                                    <input name="ingreso_liquido" id="ingreso_liquido" class="form-control o_website_form_input" widget="monetary" required=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-6">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="request_received" model="website.page">
+        <field name="name">Gracias</field>
+        <field name="type">qweb</field>
+        <field name="url">/request-received</field>
+        <field name="website_published">True</field>
+        <field name="key">ar_helpdesk_admission.request_received</field>
+        <field name="arch" type="xml">
+            <t name="Thanks" t-name="ar_helpdesk_admission.request_received">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="container">
+                            <h1>Gracias!</h1>
+                            <div class="row">
+                                <div class="alert alert-success" role="status">
+                                    Su solicitud ha sido enviada correctamente!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+</odoo>

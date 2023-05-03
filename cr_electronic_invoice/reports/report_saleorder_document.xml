@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//div[@t-field='doc.partner_id']" position="before">
+            <div t-if="doc.partner_id.commercial_name">
+                <span t-field="doc.partner_id.commercial_name"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@t-field='doc.partner_invoice_id']" position="before">
+            <div t-if="doc.partner_invoice_id.commercial_name">
+                <span t-field="doc.partner_invoice_id.commercial_name"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th t-if="doc.company_id.show_cabys" name="th_cabys" class="text-left">Código cabys</th>
+        </xpath>
+
+        <xpath expr="//td[@name='td_name']" position="after">
+            <td t-if="doc.company_id.show_cabys" name="td_cabys">
+                <span t-esc="line.product_id.get_cabys_code() or ''"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//t[@t-call='account.document_tax_totals']" position="before">
+            <!-- FE -->
+            <t t-set="discount_total" t-value="sum([line.product_uom_qty * line.price_unit * line.discount/100 for line in doc.order_line])"/>
+            <tr name="gross_total" t-if="discount_total" style="">
+                <td><strong>Total bruto</strong></td>
+                <td class="text-right">
+                    <span
+                            t-esc="discount_total + doc.amount_untaxed"
+                            t-options='{"widget": "monetary", "display_currency": doc.currency_id}'
+                    />
+                </td>
+            </tr>
+            <tr name="discount_total" t-if="discount_total" style="">
+                <td>Descuento</td>
+                <td class="text-right">
+                    <span
+                            t-esc="discount_total"
+                            t-options='{"widget": "monetary", "display_currency": doc.currency_id}'
+                    />
+                </td>
+            </tr>
+        </xpath>
+
+    </template>
+</odoo>

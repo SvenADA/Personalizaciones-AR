@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_reference_document_line" model="ir.ui.view">
+            <field name="name">Documento de referencia</field>
+            <field name="model">reference.document.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="invoice_id" readonly="1"/>
+                            <field name="external_document_id" required="1"/>
+                            <field name="type_reference_document_id" required="1"/>
+                            <field name="reference_code_id" required="1"/>
+                            <field name="reference_reason" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

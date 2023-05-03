@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_product_result_cabys_wizard_form" model="ir.ui.view">
+            <field name="name">Búsqueda Cabys</field>
+            <field name="model">product.result.cabys.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="type_search" widget="radio"/>
+                            </group>
+                            <group>
+                                <div class="o_row" name="div_search_cabys">
+                                    <field name="product_name" class="oe_inline" style="font-size: 20px" attrs="{'invisible': [('type_search', '!=', 'by_name')]}" placeholder="jugo de tomate"/>
+                                    <field name="code" class="oe_inline" style="font-size: 20px" attrs="{'invisible': [('type_search', '!=', 'by_code')]}" placeholder="8882700000000"/>
+                                    <button name="search_cabys" string="Buscar" type="object" icon="fa-search" />
+                                </div>
+                            </group>
+                        </group>
+                        <group string="Resultado">
+                            <field name="line_ids" nolabel="1"  widget="one2many_list">
+                                <tree create="0" delete="0">
+                                    <field name="apply_cabys" readonly="1"/>
+                                    <field name="code" readonly="1"/>
+                                    <field name="tax" readonly="1"/>
+                                    <field name="description" readonly="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <footer>
+                            <button string="Guardar código seleccionado" name="save_search_cabys" type="object" class="oe_highlight"/>
+                            <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_result_cabys_line_wizard_tree" model="ir.ui.view">
+            <field name="name">Cabys</field>
+            <field name="model">product.result.cabys.line.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code" readonly="1"/>
+                                <field name="description" readonly="1"/>
+                            </group>
+                            <group>
+                                <label for="tax"/>
+                                <div class="oe_inline" name="tax">
+                                    <field name="tax" nolabel="1" readonly="1"/>
+                                    <span>%</span>
+                                </div>
+                                <field name="apply_cabys" widget="boolean_toggle"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <field name="categories_ids" nolabel="1" readonly="1" widget="one2many_list">
+                                <tree editable="bottom" >
+                                    <field name="description" />
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_result_cabys_wizard" model="ir.actions.act_window">
+            <field name="name">Búsqueda Cabys</field>
+            <field name="res_model">product.result.cabys.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

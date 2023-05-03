@@ -1,0 +1,9 @@
+id,name,code,active
+type_other_charges_1,Contribución parafiscal,01,True
+type_other_charges_2,Timbre de la Cruz Roja,02,True
+type_other_charges_3,Timbre de Benemérito Cuerpo de Bomberos de Costa Rica,03,True
+type_other_charges_4,Cobro de un tercero,04,True
+type_other_charges_5,Costos de Exportación,05,True
+type_other_charges_6,Impuesto de Servicio 10%,06,True
+type_other_charges_7,Timbre de Colegios Profesionales,07,True
+type_other_charges_8,Otros,99,True

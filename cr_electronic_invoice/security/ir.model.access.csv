@@ -1,0 +1,46 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_CodeTypeProduct,code.type.product,model_code_type_product,base.group_user,1,0,0,0
+access_PaymentMethods,payment.methods,model_payment_methods,base.group_user,1,0,0,0
+access_SaleConditions,sale.conditions,model_sale_conditions,base.group_user,1,0,0,0
+access_ReferenceCode,reference.code,model_reference_code,base.group_user,1,0,0,0
+access_employee_contacs,Permiso para ver contactos con FE,model_identification_type,base.group_user,1,0,0,0
+access_config_electronic_invoice,Configuracion tecnica FE,model_config_electronic_invoice,account.group_account_invoice,1,1,0,0
+access_electronic_voucher_supplier,Comprobantes Electronicos,model_electronic_voucher_supplier,account.group_account_invoice,1,1,1,1
+access_electronic_voucher_supplier_line,Comprobantes Electronicos Lineas,model_electronic_voucher_supplier_line,account.group_account_invoice,1,1,1,1
+access_mails_electronic_invoice,Correos electronicos FE,model_mails_electronic_invoice,base.group_user,1,1,1,1
+access_external_document,Documentos Externos,model_external_document,account.group_account_invoice,1,1,1,1
+access_invoice_tax_code_rate,Tarifas de impuestos,model_invoice_tax_code_rate,account.group_account_invoice,1,1,1,0
+access_invoice_tax_type,Tipos de impuestos,model_invoice_tax_type,account.group_account_invoice,1,1,1,0
+access_type_other_charges,Tipos de otros cargos,model_type_other_charges,account.group_account_invoice,1,1,1,0
+access_activity_code_user,Tipo de actividad económica Usuario,model_activity_code,base.group_user,1,0,0,0
+access_activity_code,Tipo de actividad económica,model_activity_code,account.group_account_manager,1,1,1,0
+access_type_reference_document,Tipo de documento de referencia,model_type_reference_document,account.group_account_invoice,1,1,1,0
+access_type_reference_document_user,Tipo de documento de referencia Usuario,model_type_reference_document,base.group_user,1,0,0,0
+access_exoneration_type,Tipos de documentos de exoneración,model_exoneration_type,account.group_account_invoice,1,1,1,0
+access_exoneration_tax_electronic_invoice,Documentos de exoneración,model_exoneration_tax_electronic_invoice,account.group_account_invoice,1,1,1,0
+access_exoneration_iva_condition,Condición del IVA,model_iva_condition,account.group_account_invoice,1,1,1,0
+access_tax_type_rate,tax type rate (CE),model_tax_type_rate,base.group_user,1,1,1,0
+access_reference_document_line,Documentos de referencia,model_reference_document_line,account.group_account_invoice,1,1,1,1
+access_type_document_selection,Tipo de documento seleccion,model_type_document_selection,base.group_user,1,0,0,0
+access_fe_special_tags_partner_line,Permiso para ver lineas de etiquetas especiales,model_fe_special_tags_partner_line,base.group_user,1,1,1,1
+access_fe_special_tags_invoice_line,Permiso para ver lineas de etiquetas especiales,model_fe_special_tags_invoice_line,base.group_user,1,1,1,1
+access_fe_special_tags_company_line,Permiso para ver lineas de etiquetas especiales,model_fe_special_tags_company_line,base.group_user,1,1,1,1
+access_exoneration_cabys_line,Lineas de cabys de exoneracion,model_exoneration_cabys_line,base.group_user,1,1,1,1
+access_ElectronicInvoiceEmailAttachmentLine,Permiso para los ajuntos FE,model_electronic_invoice_email_attachment_line,account.group_account_invoice,1,1,1,1
+access_electronic_voucher_supplier_other_information_line,Comprobante Electrónico Otra Información,model_electronic_voucher_supplier_other_information_line,account.group_account_invoice,1,1,1,1
+
+
+access_create_vendor_invoice_wizard,create.vendor.invoice.wizard,model_create_vendor_invoice_wizard,base.group_user,1,1,1,1
+access_res_partner_result_mh_wizard,res.partner.result.mh.wizard,model_res_partner_result_mh_wizard,base.group_user,1,1,1,1
+access_res_partner_result_mh_activity_lines_wizard,res.partner.result.mh.activity.lines.wizard,model_res_partner_result_mh_activity_lines_wizard,base.group_user,1,1,1,1
+access_account_invoice_download_vouchers,account.invoice.download.vouchers,model_account_invoice_download_vouchers,base.group_user,1,1,1,1
+access_res_partner_result_mh_mag_lines_wizard,res.partner.result.mh.mag.lines.wizard,model_res_partner_result_mh_mag_lines_wizard,base.group_user,1,1,1,1
+access_res_partner_result_mh_exoneration_wizard,res.partner.result.mh.exoneration.wizard,model_res_partner_result_mh_exoneration_wizard,base.group_user,1,1,1,1
+access_purchase_invoice_line_wizard,purchase.invoice.line.wizard,model_purchase_invoice_line_wizard,base.group_user,1,1,1,1
+access_product_result_cabys_wizard,product.result.cabys.wizard,model_product_result_cabys_wizard,base.group_user,1,1,1,1
+access_product_result_cabys_line_wizard,product.result.cabys.line.wizard,model_product_result_cabys_line_wizard,base.group_user,1,1,1,1
+access_product_result_cabys_category_line_wizard,product.result.cabys.category.line.wizard,model_product_result_cabys_category_line_wizard,base.group_user,1,1,1,1
+access_debit_note_wizard,debit.note.wizard,model_debit_note_wizard,base.group_user,1,1,1,1
+access_purchase_invoice_wizard,purchase.invoice.wizard,model_purchase_invoice_wizard,base.group_user,1,1,1,1
+access_exoneration_cabys_line_wizard,exoneration.cabys.line.wizard,model_exoneration_cabys_line_wizard,base.group_user,1,1,1,1
+

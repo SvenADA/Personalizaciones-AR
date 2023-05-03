@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="exoneration_tax_electronic_invoice_tree_view" model="ir.ui.view">
+            <field name="name">Documento de exoneracion tree</field>
+            <field name="model">exoneration.tax.electronic.invoice</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="document_type_id"/>
+                    <field name="document_number"/>
+                    <field name="purchase_percentage"/>
+                    <button name="consult_exoneration" string="Verificar Autorización" type="object" class="oe_link" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_exoneration_tax_electronic_invoice" model="ir.ui.view">
+            <field name="name">Documento de exoneracion form</field>
+            <field name="model">exoneration.tax.electronic.invoice</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="consult_exoneration" string="Verificar Autorización" type="object" class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="name" required="1" placeholder="Exonerado en 13% COLEGIO FEDERADO"/>
+                                <field name="document_type_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="institution_name" required="1"/>
+                                <field name="document_number" required="1"/>
+                                <field name="validate_cabys" />
+                            </group>
+                            <group>
+                                <field name="date_issue" required="1"/>
+                                <field name="default_time_issue" invisible="1"/>
+                                <field name="time_issue" required="1" placeholder="00:00:00" attrs="{'readonly':[('default_time_issue', '=', True)]}" force_save="1"/>
+                                <field name="due_date" />
+
+                                <label for="purchase_percentage"/>
+                                <div class="o_row" name="purchase_percentage">
+                                    <field name="purchase_percentage" nolabel="1" placeholder="13"/>
+                                    <span>%</span>
+                                </div>
+
+                            </group>
+                        </group>
+                        <group string="Cabys permitidos">
+                            <field name="cabys_line_ids" nolabel="1" widget="one2many_list" >
+                                <tree editable="bottom">
+                                    <field name="code"/>
+                                    <field name="product_id"/>
+                                    <field name="category_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_exoneration_tax_electronic_invoice">
+            <field name="name">Documento de Exoneración</field>
+            <field name="res_model">exoneration.tax.electronic.invoice</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_exoneration_tax_electronic_invoice"
+                  name="Documentos de Exoneración"
+                  parent="menu_electronic_invoice"
+                  sequence="14"
+                  action="action_exoneration_tax_electronic_invoice"
+        />
+
+        <record id="view_account_position_form_inherit_form" model="ir.ui.view">
+            <field name="name">FE Exoneración</field>
+            <field name="model">account.fiscal.position</field>
+            <field name="inherit_id" ref="account.view_account_position_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree[@name='tax_map_tree']//field[@name='tax_dest_id']" position="after">
+                    <field name="exoneration"/>
+                    <button name="%(cr_electronic_invoice.action_create_exoneration_wizard)d"
+                            string="Crear Documento de Exoneración"
+                            type="action" class="oe_link"
+                            context="{'account_position_tax_id': id, 'create_exoneration': True}"
+                    />
+                </xpath>
+
+                <xpath expr="//form[@name='tax_map_form']//field[@name='tax_dest_id']" position="after">
+                    <field name="exoneration"/>
+                </xpath>
+
+                <xpath expr="//sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,code,name,active
+type_document_selection_1,09,Factura de exportación,true
+type_document_selection_2,02,Nota de débito,true
+type_document_selection_3,08,Factura de compra,true

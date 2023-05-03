@@ -1,0 +1,46 @@
+<odoo>
+
+    <data noupdate="1">
+
+      <record id="pos_product_food_cat" model="pos.category">
+                <field name="name">Food and Drinks</field>
+        </record>
+
+        <record model="pos.config" id="point_of_sale.pos_config_main">
+            <field name="start_category">True</field>
+            <field name="iface_start_categ_id" ref="pos_product_food_cat"></field>
+        </record>
+
+        <record id="kitchen_screen_1" model="pos.kitchen.screen.config">
+            <field name="name">Kitchen Screen</field>
+            <field name="pos_config_ids" eval="[(6, 0, [ ref('point_of_sale.pos_config_main')])]"/>
+            <!-- <field name="pos_config_ids" eval="[(6, 0, [])]"/> -->
+            <field name="pos_category_ids" eval="[(6, 0, [ ref('pos_product_food_cat')])]"/>
+        </record>
+
+        <record id="wk_kitchen_drinks" model="product.product">
+            <field name="name">Cold Drinks</field>
+            <field name="standard_price">15</field>
+            <field name="list_price">15</field>
+            <field name="available_in_pos">True</field>
+            <field name="pos_categ_id"  ref="pos_product_food_cat"/>
+            <field name="default_code">wk_cold_drinks</field>
+            <field name="image_1920" type="base64" file="pos_kitchen_screen/static/description/drinks.jpg"/>
+        </record> 
+
+
+
+        <record id="wk_kitchen_pizza" model="product.product">
+            <field name="name">Pizza</field>
+            <field name="standard_price">50</field>
+            <field name="list_price">50</field>
+            <field name="available_in_pos">True</field>
+            <field name="default_code">pizza</field>
+            <field name="pos_categ_id" ref="pos_product_food_cat"/>
+            <field name="image_1920" type="base64" file="pos_kitchen_screen/static/description/pizza.jpg"/>
+
+        </record> 
+
+      
+    </data>
+</odoo>
